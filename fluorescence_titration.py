@@ -5,7 +5,7 @@ Created on Sun Dec 27 17:08:56 2020
 @author: svea_
 """
 
-import prntitration as pt
+import functions_spectral_analysis as fsa
 
 import numpy as np
 
@@ -16,24 +16,24 @@ sns.set()
 palette = ["#4A456A", "#6B8CA6", "#345C64", "#806B5C", "#CAA87D", "#B56470", 
            "#84BB94", "#67504C", "#E98D2B"]
 sns.set_palette(palette)
-sns.set_style("ticks", {"axes.facecolor": "aliceblue"})
+sns.set_style("ticks")
 sns.set_context("notebook", font_scale=1.5, rc={"lines.linewidth": 2.5})
 
 location = path_to_file
 
-df_1 = pt.generate_df(location[0])
-df_2 = pt.generate_df(location[1])
+df_1 = fsa.generate_df(location[0])
+df_2 = fsa.generate_df(location[1])
 
-frexs, frexl = pt.separate_long_short(df_1)
-nadhs, nadhl = pt.separate_long_short(df_2)
+frexs, frexl = fsa.separate_long_short(df_1)
+nadhs, nadhl = fsa.separate_long_short(df_2)
 
-frexs = pt.separate_x_y(frexs)
-frexl = pt.separate_x_y(frexl)
-nadhs = pt.separate_x_y(nadhs)
+frexs = fsa.separate_x_y(frexs)
+frexl = fsa.separate_x_y(frexl)
+nadhs = fsa.separate_x_y(nadhs)
 
-frexs = pt.rename_cols(frexs)
-frexl = pt.rename_cols(frexl)
-nadhs = pt.rename_cols(nadhs)
+frexs = fsa.rename_cols(frexs)
+frexl = fsa.rename_cols(frexl)
+nadhs = fsa.rename_cols(nadhs)
 
 # for clearness just plot a sample of the data
 long_keep = ["x", "0", "2", "4", "6", "10", "25", "50", "100", "200"]
@@ -51,10 +51,10 @@ NADH_keep = ["x", "0", "10", "25", "50", "75",  "125", "200"]
 nadhs = nadhs[NADH_keep]
 
 #scaling plots in y-axis
-frexs_1 = pt.scale_y_axis(frexs_1, short_keep_1[1:])
-frexs_2 = pt.scale_y_axis(frexs_2, short_keep_2[1:])
-frexl = pt.scale_y_axis(frexl, long_keep[1:])
-nadhs = pt.scale_y_axis(nadhs, NADH_keep[1:])
+frexs_1 = fsa.scale_y_axis(frexs_1, short_keep_1[1:])
+frexs_2 = fsa.scale_y_axis(frexs_2, short_keep_2[1:])
+frexl = fsa.scale_y_axis(frexl, long_keep[1:])
+nadhs = fsa.scale_y_axis(nadhs, NADH_keep[1:])
 
 fig, axes = plt.subplots(2, 2, figsize=(9,7), dpi=400)
 
